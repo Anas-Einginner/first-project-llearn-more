@@ -8,3 +8,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return 'Welcome Anas to Laravel with the distinguished teacher Ahmed Zaqout ';
 });
+Route::get('/home',function(){
+   return view('home');
+});
