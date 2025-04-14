@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SiteOne\SiteOneController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use League\Flysystem\UrlGeneration\PrefixPublicUrlGenerator;
@@ -42,32 +43,15 @@ Route::get('/', function () {
 // });
 
 // url muss write the id
-Route::get('/profile/{id}',function($id){
-    echo 'Id for Profile is : '. $id ;
-});
-// user can edit id or not nicht erforderlich
-Route::get('news/{id?}', function ($id=null) {
-    $news =[1,3,5,7];
-    if ($id) {
-        echo  'The new is a '.$id ;
-    }
-    else {
-        echo "All the news <br>";
-        foreach ($news as $new) {
-        echo $new .'<br>' ;
-        }
-    }
-
-});
-// wenn we have so much page have the same name
-Route::prefix('site')->group(function() {
-    Route::get('/home',function(){
-        echo 'Home page' ;
-    });
-    Route::get('/about',function(){
-        echo 'About us' ;
-    });
-    Route::get('/contact',function(){
-        echo 'Contact Us' ;
-    });
+// Route::prefix('site1')->group(function(){
+//     Route::get('/home',[ SiteOneController::class,'home']);
+//     Route::get('/about',[SiteOneController::class,'about']);
+//     Route::get('/contact',[SiteOneController::class,'contact']);
+//     Route::get('/msg/{id}',[SiteOneController::class,'msg']);
+// });
+Route::prefix('site1')->controller(SiteOneController::class)->group(function(){
+    Route::get('/home','home');
+    Route::get('/about','about');
+    Route::get('/contact','contact');
+    Route::get('/msg/{id}','msg');
 });
